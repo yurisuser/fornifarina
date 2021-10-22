@@ -1,0 +1,9 @@
+<div class="card " *ngIf="card">
+    <div class="img-wrapper">
+        <img [src]="card.image">
+    </div>
+    <div class="text-wrapper">
+        <div class="head-text">{{card.headText | uppercase}}</div>
+        <div class="short-text">{{card.shortText}}</div>
+    </div>
+</div>

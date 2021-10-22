@@ -1,0 +1,14 @@
+<div class="main">
+    <div class="coal">
+        <div class="slogan">FIRE LIVES HERE</div>
+        <div class="subslogan">wood burning stoves</div>
+    </div>
+    <div  class="container">
+        <div *ngIf="cards.length" class="row d-flex justify-content-center">
+            <div *ngFor="let item of cards" class="col-md-9 col-lg-7 col-xl-6 col-xxl-5">
+                <app-card [card]="item"></app-card>
+            </div>    
+        </div>
+
+    </div>
+</div>

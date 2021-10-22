@@ -1,0 +1,57 @@
+@import "../../variables";
+
+.card {
+    background-color: $color-bg-main;
+    color: $color-main;
+    display: flex;
+    flex-direction: row;
+    margin-top: .5em;
+
+    .img-wrapper {
+        width: 50%;
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .text-wrapper {
+        display: flex;
+        flex-flow: column nowrap;
+
+        padding-left: 10px;
+        width: 50%;
+        .head-text {
+            color: $color-fire;
+            margin-top: 20px;
+        }
+        .short-text{
+            margin-top: 10px;
+        }
+    }
+
+}
+
+@media (min-width: 100px) {
+    .head-text {
+        font-size: 4vw;
+    }
+    .short-text {
+        font-size: 3vw;
+    }
+}
+
+@media (min-width: 576px) {
+    .head-text {
+        font-size: 1.5em;
+    }
+    .short-text {
+        font-size: 1.1em;
+    }
+}
+
+@media (min-width: 768px) {
+    .head-text {
+        font-size: 1.5rem;
+    }
+}
