@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CardModel } from 'src/app/models/card.model';
 
-import { DataService } from '../services/data.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
     selector: 'app-main',
