@@ -13,6 +13,6 @@ export class MainComponent implements OnInit {
     constructor(private dataSrv: DataService) {}
 
     ngOnInit(): void {
-        this.dataSrv.getCards().subscribe((x) => (this.cards = x));
+        this.dataSrv.getCardsTest().subscribe((x) => (this.cards = x));
     }
 }

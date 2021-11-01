@@ -1,0 +1,26 @@
+<div class="lang-panel">
+    <div class="dropdown">
+        <svg class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" height="30" width="25" xmlns="http://www.w3.org/2000/svg" fill="White">
+            <image  [attr.xlink:href]="getLink()" height="30" width="25"></image>
+        </svg>
+
+        <ul class="dropdown-menu bg-black" aria-labelledby="dropdownMenuButton1">
+            <li  *ngIf="mainFlag !== 'en'" (click)="onClick('en')">
+                <svg height="70" width="50" xmlns="http://www.w3.org/2000/svg" fill="White">
+                    <image href="../../../assets/pic/flags/en.svg" height="70" width="50"></image>
+                </svg>
+            </li>
+            <li  *ngIf="mainFlag !== 'ua'" (click)="onClick('ua')">
+            <svg height="70" width="50" xmlns="http://www.w3.org/2000/svg" fill="White">
+                <image href="../../../assets/pic/flags/ua.svg" height="70" width="50"></image>
+            </svg>
+            </li>
+            <li *ngIf="mainFlag !== 'ru'" (click)="onClick('ru')">
+                <svg height="70" width="50" xmlns="http://www.w3.org/2000/svg" fill="White">
+                    <image href="../../../assets/pic/flags/ru.svg" height="70" width="50"></image>
+                </svg>
+            </li>
+        </ul>
+
+      </div>
+</div>
