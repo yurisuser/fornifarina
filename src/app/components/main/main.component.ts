@@ -10,9 +10,19 @@ import { DataService } from '../../services/data.service';
 })
 export class MainComponent implements OnInit {
     cards: CardModel[] = [];
+    data: any;
+
     constructor(private dataSrv: DataService) {}
 
     ngOnInit(): void {
         this.dataSrv.getCardsTest().subscribe((x) => (this.cards = x));
+        this.dataSrv.getLayout().subscribe((x) => {
+            this.data = x;
+        });
+    }
+
+    getStringById(id: any) {
+        let a = this.data.find((s: any) => s.id == id).value;
+        return a;
     }
 }

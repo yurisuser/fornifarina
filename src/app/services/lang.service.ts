@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject, Subscriber } from 'rxjs';
+import { subscribeOn } from 'rxjs/operators';
 
 export enum ELang {
     en,
@@ -11,12 +12,14 @@ export enum ELang {
     providedIn: 'root'
 })
 export class LangService {
-    public currentLang: Subject<ELang> = new Subject<ELang>();
+    public currentLang = new BehaviorSubject<ELang>(this.getBrowserLang());
 
     constructor() {}
 
     getBrowserLang() {
-        let lang = ELang.en;
+        console.log('get browser lang');
+
+        let lang: ELang;
         switch (navigator.language) {
             case 'ru':
                 lang = ELang.ru;
@@ -24,18 +27,10 @@ export class LangService {
             case 'ua':
                 lang = ELang.ua;
                 break;
-            case 'en':
+            default:
                 lang = ELang.en;
                 break;
-            default:
-                break;
         }
-        this.setLang(lang);
-    }
-
-    setLang(lang: ELang) {
-        console.log(lang);
-
-        this.currentLang.next(lang);
+        return lang;
     }
 }

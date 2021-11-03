@@ -18,7 +18,7 @@ export class LangPanelComponent implements OnInit {
 
     onClick(flag: string) {
         this.mainFlag = flag;
-        this.langSrv.setLang(ELang[flag as keyof typeof ELang]);
+        this.langSrv.currentLang.next(ELang[flag as keyof typeof ELang]);
         //https://stackoverflow.com/questions/17380845/how-do-i-convert-a-string-to-enum-in-typescript
     }
 

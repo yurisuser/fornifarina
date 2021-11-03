@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
 import { CardModel } from 'src/app/models/card.model';
 import { GoogleService } from './google.service';
+import { LangService } from './lang.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class DataService {
-    private _externCards: any;
     private _externLayout: any;
 
-    constructor(private googleSrv: GoogleService) {}
+    constructor(
+        private googleSrv: GoogleService,
+        private langSrv: LangService
+    ) {}
 
     getCardsTest(): Observable<CardModel[]> {
         let card = {
@@ -26,10 +29,26 @@ export class DataService {
     }
 
     getLayout(): Observable<any> {
-        return this._externLayout
-            ? of(this._externLayout)
-            : this.googleSrv
-                  .getLayoutData()
-                  .pipe(map((x) => (this._externLayout = x)));
+        if (this._externLayout) {
+            return of(this._externLayout);
+        } else {
+            return this.googleSrv
+                .getLayoutData()
+                .pipe(switchMap((x) => this.parseLayout(x.values)));
+        }
+    }
+
+    private parseLayout(data: any): any {
+        console.log(data);
+
+        return this.langSrv.currentLang.pipe(
+            map((l) => {
+                return data
+                    .map((item: any) => {
+                        return { id: item[0], value: item[l + 1] };
+                    })
+                    .splice(1, Infinity);
+            })
+        );
     }
 }
