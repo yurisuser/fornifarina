@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
@@ -11,6 +11,7 @@ import { LangService } from './lang.service';
 })
 export class DataService {
     private _externLayout: any;
+    private _externCards: any;
 
     constructor(
         private googleSrv: GoogleService,
@@ -28,6 +29,16 @@ export class DataService {
         return of(new Array(10).fill(card));
     }
 
+    getCards(): Observable<any> {
+        if (this._externCards) {
+            return of(this._externCards);
+        } else {
+            return this.googleSrv
+                .getCardsData()
+                .pipe(switchMap((x) => this.parseCards(x.values)));
+        }
+    }
+
     getLayout(): Observable<any> {
         if (this._externLayout) {
             return of(this._externLayout);
@@ -39,16 +50,34 @@ export class DataService {
     }
 
     private parseLayout(data: any): any {
-        console.log(data);
-
+        data.shift();
+        let result = data.map(
+            (x: any) => (x = { id: x[0], en: x[1], ua: x[2], ru: x[3] })
+        );
         return this.langSrv.currentLang.pipe(
             map((l) => {
-                return data
-                    .map((item: any) => {
-                        return { id: item[0], value: item[l + 1] };
-                    })
-                    .splice(1, Infinity);
+                return result.map((x: any) => ({ id: x.id, value: x[l] }));
             })
+        );
+    }
+
+    private parseCards(data: any): any {
+        data.shift();
+
+        let result = data.map(
+            (item: any) =>
+                (item = {
+                    id: item[0],
+                    lang: item[1],
+                    title: item[2],
+                    description: item[3],
+                    image: `assets/pic/stoves/${item[4]}`,
+                    text: item[5]
+                })
+        );
+
+        return this.langSrv.currentLang.pipe(
+            map((l) => result.filter((x: CardModel) => x.lang === l))
         );
     }
 }

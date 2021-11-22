@@ -1,6 +1,8 @@
 export interface CardModel {
     id: number;
+    lang: string;
+    title: string;
+    description: string;
     image: string;
-    headText: string;
-    shortText: string;
+    text: string;
 }

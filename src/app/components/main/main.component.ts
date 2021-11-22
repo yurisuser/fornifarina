@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CardModel } from 'src/app/models/card.model';
+import { LangService } from 'src/app/services/lang.service';
 
 import { DataService } from '../../services/data.service';
 
@@ -10,19 +11,16 @@ import { DataService } from '../../services/data.service';
 })
 export class MainComponent implements OnInit {
     cards: CardModel[] = [];
-    data: any;
+    layoutData: any;
+    currLang$: any;
 
-    constructor(private dataSrv: DataService) {}
+    constructor(private dataSrv: DataService, private langSrv: LangService) {}
 
     ngOnInit(): void {
-        this.dataSrv.getCardsTest().subscribe((x) => (this.cards = x));
+        this.currLang$ = this.langSrv.currentLang;
+        this.dataSrv.getCards().subscribe((x) => (this.cards = x));
         this.dataSrv.getLayout().subscribe((x) => {
-            this.data = x;
+            this.layoutData = x;
         });
-    }
-
-    getStringById(id: any) {
-        let a = this.data.find((s: any) => s.id == id).value;
-        return a;
     }
 }

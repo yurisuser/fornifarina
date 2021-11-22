@@ -1,7 +1,7 @@
 <div class="main">
-    <div *ngIf="data" class="coal">
-        <div class="slogan">{{ getStringById(1) | uppercase }}</div>
-        <div class="subslogan">{{ getStringById(2) | lowercase }}</div>
+    <div *ngIf="layoutData" class="coal">
+        <div class="slogan">{{ layoutData[0].value | uppercase }}</div>
+        <div class="subslogan">{{ layoutData[1].value | lowercase }}</div>
     </div>
     <div  class="container">
         <div *ngIf="cards.length" class="row d-flex justify-content-center">

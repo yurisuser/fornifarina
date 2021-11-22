@@ -3,9 +3,9 @@ import { BehaviorSubject, Subject, Subscriber } from 'rxjs';
 import { subscribeOn } from 'rxjs/operators';
 
 export enum ELang {
-    en,
-    ua,
-    ru
+    en = 'en',
+    ua = 'ua',
+    ru = 'ru'
 }
 
 @Injectable({
@@ -17,8 +17,6 @@ export class LangService {
     constructor() {}
 
     getBrowserLang() {
-        console.log('get browser lang');
-
         let lang: ELang;
         switch (navigator.language) {
             case 'ru':

@@ -9,7 +9,7 @@ export class GoogleService {
     //https://sheets.googleapis.com/v4/spreadsheets/1oL66ymKTZNEFBCIF3Zkd4oZRjEbNymxHOgGjmER67N0/values/layout!A1:F100?key=AIzaSyBkdiuCI3ThuWIR7OrmQFGoEaAgx1LaYRU
     private readonly id = '1oL66ymKTZNEFBCIF3Zkd4oZRjEbNymxHOgGjmER67N0';
     private readonly listLayoutName = 'layout';
-    private readonly cardsName = 'layout';
+    private readonly cardsName = 'data';
     private readonly key = 'AIzaSyBkdiuCI3ThuWIR7OrmQFGoEaAgx1LaYRU';
     constructor(private http: HttpClient) {}
 

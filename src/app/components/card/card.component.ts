@@ -8,6 +8,7 @@ import { CardModel } from 'src/app/models/card.model';
 })
 export class CardComponent implements OnInit {
     @Input() card: CardModel | undefined;
+
     constructor() {}
 
     ngOnInit(): void {}
